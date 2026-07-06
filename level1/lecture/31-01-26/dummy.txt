@@ -1,0 +1,4 @@
+How to call a python script into another script?
+is file operation is like file handling
+read, write, edit, close
+store information
