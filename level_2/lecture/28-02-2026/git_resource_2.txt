@@ -1,0 +1,101 @@
+git init
+git add
+git commit -m "very first git commit"
+
+if above code provides error, do the below
+    Step 1 :    git config --global user.email "you@example.com"
+    Step 2 :    git config --global user.name "Monalsingh"
+    Step 3 :    git commit -m "very first git commit"
+
+
+>> Make sure your are on main branch by running below 
+git branch -M main  # while installing, we mentioned to use 'main'
+
+git remote add origin https://github.com/Monalsingh/dummy1.git
+
+git push -u origin main
+
+========================================================================
+=================================== NEW ================================
+========================================================================
+
+
+GIT INITIALIZATION & MULTI-USER SETUP GUIDE
+========================================================================
+
+1. THE "IDENTITY CRISIS" PROBLEM
+------------------------------------------------------------------------
+If your system already has a user set up (e.g., from months ago), Git 
+defaults to those global credentials. If you try to push to a new 
+account, you will see a '403 Forbidden' error because Git is trying to 
+use 'OldUser' to write to 'NewUser's' repository.
+
+
+
+2. INSTALLATION & BASH
+------------------------------------------------------------------------
+- WINDOWS: Download "Git for Windows". During install, ensure "Git Bash" 
+  is selected. This gives you a Linux-like terminal on Windows.
+- MAC: Run 'git --version' in Terminal. If not there, it will prompt 
+  you to install 'Xcode Command Line Tools'.
+
+3. THE "FIRST TIME" WORKFLOW
+------------------------------------------------------------------------
+Open Git Bash (Windows) or Terminal (Mac) and navigate to your folder:
+
+$ git init
+  > Expect: "Initialized empty Git repository in..."
+$ git add .
+  > Note: The dot adds EVERYTHING in the current folder.
+$ git commit -m "First commit"
+
+--- ERROR HANDLING: THE IDENTITY CHECK ---
+If you see: "Author identity unknown"
+Run these commands to tell Git who you are for THIS PROJECT ONLY 
+(removes the conflict with your old global account):
+
+$ git config user.email "new-email@example.com"
+$ git config user.name "MonalSingh"
+
+*Note: Removing '--global' ensures these settings stay inside this 
+specific folder and don't overwrite your old account's global settings.*
+
+4. CONNECTING TO GITHUB
+------------------------------------------------------------------------
+$ git branch -M main
+$ git remote add origin https://github.com/Monalsingh/dummy1.git
+$ git push -u origin main
+
+--- WHAT TO EXPECT ON SCREEN ---
+- A popup window (Git Credential Manager) will likely appear.
+- DO NOT use your GitHub password. Use a "Personal Access Token" (PAT) 
+  or "Sign in via Browser".
+- If it fails with "Permission denied to [OldUser]", you must clear 
+  your stored credentials (see Section 5).
+
+5. COMMON ERRORS & SOLUTIONS
+------------------------------------------------------------------------
+
+ERROR: "remote: Permission to NewUser/repo.git denied to OldUser"
+- WHY: Your computer saved your old login details in the "Keychain" or 
+  "Credential Manager".
+- FIX (Windows): Search "Credential Manager" > Windows Credentials > 
+  Find 'git:https://github.com' > Remove or Edit it.
+- FIX (Mac): Search "Keychain Access" > Search 'github.com' > Delete 
+  the internet password entry.
+
+ERROR: "fatal: remote origin already exists"
+- WHY: You already ran the 'git remote add' command.
+- FIX: Run 'git remote remove origin' then try again.
+
+ERROR: "failed to push some refs to..."
+- WHY: Usually because the GitHub repo has files (like a README) that 
+  your local computer doesn't have.
+- FIX: Run 'git pull origin main --rebase' before pushing.
+
+6. PRO TIPS
+------------------------------------------------------------------------
+- Check your current settings anytime: 'git config --list'
+- See what's happening: 'git status' (Do this constantly!)
+- See your history: 'git log --oneline'
+========================================================================

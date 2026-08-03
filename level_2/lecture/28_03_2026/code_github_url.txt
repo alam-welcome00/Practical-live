@@ -1,0 +1,16 @@
+# Project Description:
+
+Our learning documents are scattered across local storage.  
+We have various materials such as books, documents, class notes, and PDFs.  
+When we try to search, it becomes very difficult to find a specific topic.  
+
+Often, we need to check Notion or re-watch videos, but with so many documents, it becomes confusing where and what to search.  
+
+We are planning a project to solve this problem by creating a more organized and efficient way to manage and search our learning resources.
+
+
+Upgrade of the future AI based analytics
+
+# URL : 
+
+https://github.com/nimowhyca/DocManager

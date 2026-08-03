@@ -1,0 +1,16 @@
+install git
+go to GitHub, create a repo
+copy everycode you see from the GitHub to notepad
+create a project / folder
+- keep files
+- open the folder with terminal
+- git init
+- git add .
+- git commit -m "adding files"
+
+git config user.email "new-email@example.com"
+git config user.name "MonalSingh"
+
+git branch -M main
+git remote add origin https://github.com/Monalsingh/abc.git
+git push -u origin main
