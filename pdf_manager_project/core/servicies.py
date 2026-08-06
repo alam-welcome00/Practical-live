@@ -1,33 +1,52 @@
-# upload documents
-# -->uploaded_file, tags, description, date
-# -->uploaded_file -->.pdf
-# -->uploaded_file -->folder with the same name as pdf --> extract all image
-# -->uploaded_file--> Total number of pages
-# -->uploaded_file-->date time
+from datetime import datetime
 
 from db.repsitory import DocumentRepsitory
-from datetime import datetime
-import os
+from core.model import Document
 from core.fileManager import FileManager
 from core.thumbnail import ThumbnailGenerator
-PDF_STORAGE = os.path.join("storage", "pdf")
+from core.reader import ReadPdf
+
 
 class DocumentService:
+
     def __init__(self):
+
         self.repo = DocumentRepsitory()
         self.file_manager = FileManager()
         self.thumbnail_generator = ThumbnailGenerator()
-    def upload_doc(self, uploaded_file, tags, description, lecture_Date=None):
+        self.read_image = ReadPdf()
 
-        doc = []
+    def upload_doc(self, uploaded_file, tags, description, lecture_date=None):
+
         file_path = self.file_manager.save_pdf(uploaded_file)
 
-        # 2.GENERATED THUMBNAIL
         thumbnail = self.thumbnail_generator.generating_thumbnail(file_path)
-        # 3.GET TOTAL PAGE
-        total_page = self.thumbnail_generator.total_pages(file_path)
-        # 4.CONVERT PAGES
 
-        # 5.CREATE REQUIRED VARIABLE ->UPLOADED DATE
-        # 6.SAVE TO DB
-        # self.repo.add_document(doc)
+        total_pages = self.thumbnail_generator.total_pages(file_path)
+
+        self.read_image.conver_to_image(file_path)
+
+        uploaded_date = datetime.now().strftime("%Y-%m-%d")
+
+        doc = Document(
+            name=uploaded_file.name,
+            path=file_path,
+            thumbnail_path=thumbnail,
+            tags=tags,
+            description=description,
+            uploaded_date=uploaded_date,
+            lecture_date=str(lecture_date) if lecture_date else None,
+            total_pages=total_pages
+        )
+
+        self.repo.add_document(doc)
+
+    def search_doc(self, tags=None, date=None):
+
+        return self.repo.search_doc(tags, date)
+
+
+    def get_all_doc(self):
+        return self.repo.get_all_doc()
+
+
