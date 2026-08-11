@@ -56,7 +56,7 @@ if st.session_state.show_reset:
 
             pdf_dir = os.path.join("storage","pdf")
             thumbnail_dir = os.path.join("storage","thumbnails")
-            img_dir = os.path.join("storage","pdfs")
+            img_dir = os.path.join("storage","pdf")
 
             shutil.rmtree(pdf_dir,ignore_errors=True)
             shutil.rmtree(thumbnail_dir,ignore_errors=True)
@@ -146,7 +146,7 @@ with tabs[1]:
         doc = st.session_state.selected_doc
         st.subheader(f"Reading: {doc.name}")
         folder_name = os.path.splitext(os.path.basename(doc.path))[0]
-        image_dir = os.path.join("storage", "pdfs", folder_name)  # or "pdf" if that's where you save
+        image_dir = os.path.join("storage", "pdf", folder_name)  # or "pdf" if that's where you save
 
         st.write("Document Path:", doc.path)
         st.write("Folder Name:", folder_name)
